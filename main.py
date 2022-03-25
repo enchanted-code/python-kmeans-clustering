@@ -5,6 +5,14 @@ import pandas as pd
 from sklearn.cluster import KMeans
 
 
+def plot_data(data, x, y, xl, yl, title):
+    plt.scatter(x=x, y=y, data=data)
+    plt.title(title)
+    plt.xlabel(xl)
+    plt.ylabel(yl)
+    plt.show()
+
+
 def show_elbow_plot(data, max_k):
     means = []
     inertias = []
@@ -57,6 +65,9 @@ def main():
 
     column_names = ["sepal-length", "petal-length"]
     selected_data = df[column_names]
+
+    x, y = column_names
+    plot_data(df, x, y, "Sepal Length", "Petal Length", "Selected Data")
 
     show_elbow_plot(selected_data, 10)
 
