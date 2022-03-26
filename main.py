@@ -27,6 +27,7 @@ def show_elbow_plot(data, max_k):
     plt.plot(means, inertias, 'o-')
     plt.xlabel("Number of Clusters")
     plt.ylabel("Inertia")
+    plt.title("Elbow Plot Of Possible K Values")
     plt.grid(True)
     plt.show()
 
@@ -71,8 +72,8 @@ def main():
 
     show_elbow_plot(selected_data, 10)
 
-    k_min = 2
-    k_max = 3
+    k_min = 1
+    k_max = 4
     cluster_columns = []
 
     for k in range(k_min, k_max + 1):
@@ -80,9 +81,10 @@ def main():
         df[f"cluster_{k}"] = kmeans.labels_
         cluster_columns.append(f"cluster_{k}")
 
-    plt.figure(figsize=(12,8))
+    plt.figure(figsize=(14,12))
+    rows = len(cluster_columns) // 2
     for i, k_col in enumerate(cluster_columns, 1):
-        plt.subplot(1, 2, i)
+        plt.subplot(rows, 2, i)
         x, y = column_names
         plot_cluster(df, kmeans, x, y, k_col, "Sepal Length", "Petal Length", k_col)
     plt.show()
